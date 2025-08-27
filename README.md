@@ -1,17 +1,203 @@
-# Smart IT Solutions Website
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart IT Solutions</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+    }
+    header {
+      background: #161b22;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+    header img {
+      height: 60px;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #58a6ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 2.8em;
+      margin-bottom: 20px;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+    .service {
+      background: #21262d;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.4);
+    }
+    .service h2 {
+      color: #58a6ff;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #161b22;
+    }
+    /* Chatbot Styles */
+    #chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      background: #161b22;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #chatbot-header {
+      background: #58a6ff;
+      color: #fff;
+      padding: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #chatbot-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      max-height: 250px;
+      font-size: 14px;
+    }
+    #chatbot-input {
+      display: flex;
+      border-top: 1px solid #333;
+    }
+    #chatbot-input input {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+      outline: none;
+      background: #0d1117;
+      color: #fff;
+    }
+    #chatbot-input button {
+      background: #58a6ff;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      color: #fff;
+      font-weight: bold;
+    }
+    #chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #58a6ff;
+      color: #fff;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
 
-Welcome to **Smart IT Solutions** – a professional IT support and web development website with an **AI-powered chatbot**.  
+  <header>
+    <img src="logo.png" alt="Smart IT Solutions Logo">
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.linkedin.com/in/sergio-fonseca-it" target="_blank">LinkedIn</a>
+    </nav>
+  </header>
 
----
+  <section class="hero">
+    <h1>Welcome to Smart IT Solutions</h1>
+    <p>Your trusted partner in IT support, web development, and AI-powered solutions.</p>
+  </section>
 
-## 🌐 Website Features
+  <section id="services" class="services">
+    <div class="service">
+      <h2>IT Support</h2>
+      <p>Remote and onsite troubleshooting, network setup, and tech assistance.</p>
+    </div>
+    <div class="service">
+      <h2>Web Development</h2>
+      <p>Custom websites designed to showcase your business with SEO optimization.</p>
+    </div>
+    <div class="service">
+      <h2>AI Chatbots</h2>
+      <p>Smart chatbots to engage your clients and provide 24/7 support.</p>
+    </div>
+  </section>
 
-- **IT Support Services:** Remote and onsite troubleshooting, network setup, and tech assistance.  
-- **Web Development Services:** Custom websites with SEO optimization.  
-- **AI Chatbot:** Interactive AI assistant that responds in **English and Spanish** in real-time.  
+  <footer id="contact">
+    <p>📞 Contact us: (239) 315-8670</p>
+    <p>© 2025 Smart IT Solutions</p>
+  </footer>
 
----
+  <!-- Chatbot UI -->
+  <button id="chatbot-toggle">💬</button>
+  <div id="chatbot-container">
+    <div id="chatbot-header">Smart IT Assistant</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input">
+      <input type="text" id="user-input" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
 
-## 💻 Live Demo
+  <script>
+    const toggleBtn = document.getElementById("chatbot-toggle");
+    const chatbot = document.getElementById("chatbot-container");
+    const messages = document.getElementById("chatbot-messages");
 
-You can view the live website (hosted on GitHub Pages) at:  
+    toggleBtn.onclick = () => {
+      chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+    };
+
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const userText = input.value.trim();
+      if (!userText) return;
+
+      // Display user message
+      const userMsg = document.createElement("div");
+      userMsg.textContent = "👤: " + userText;
+      messages.appendChild(userMsg);
+
+      // Simulate AI response
+      const botMsg = document.createElement("div");
+      botMsg.textContent = "🤖: Thanks for reaching out! We'll contact you shortly.";
+      messages.appendChild(botMsg);
+
+      // Scroll to bottom
+      messages.scrollTop = messages.scrollHeight;
+
+      input.value = "";
+    }
+  </script>
+
+</body>
+</html>
