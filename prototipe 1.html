@@ -1,203 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart IT Solutions</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0d1117;
-      color: #e6edf3;
-    }
-    header {
-      background: #161b22;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
-    }
-    header img {
-      height: 60px;
-    }
-    nav a {
-      margin: 0 15px;
-      color: #58a6ff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .hero h1 {
-      font-size: 2.8em;
-      margin-bottom: 20px;
-    }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 40px;
-    }
-    .service {
-      background: #21262d;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.4);
-    }
-    .service h2 {
-      color: #58a6ff;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #161b22;
-    }
-    /* Chatbot Styles */
-    #chatbot-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 320px;
-      background: #161b22;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    #chatbot-header {
-      background: #58a6ff;
-      color: #fff;
-      padding: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    #chatbot-messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      max-height: 250px;
-      font-size: 14px;
-    }
-    #chatbot-input {
-      display: flex;
-      border-top: 1px solid #333;
-    }
-    #chatbot-input input {
-      flex: 1;
-      border: none;
-      padding: 10px;
-      font-size: 14px;
-      outline: none;
-      background: #0d1117;
-      color: #fff;
-    }
-    #chatbot-input button {
-      background: #58a6ff;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-      color: #fff;
-      font-weight: bold;
-    }
-    #chatbot-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #58a6ff;
-      color: #fff;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart IT Solutions</title>
+<style>
+  body {margin:0;font-family:Arial,sans-serif;background:#0d1117;color:#e6edf3;scroll-behavior:smooth;}
+  header {background:#161b22;display:flex;justify-content:space-between;align-items:center;padding:15px 40px;position:sticky;top:0;z-index:1000;}
+  header img {height:60px;transition:transform 0.3s;}
+  header img:hover {transform:scale(1.1);}
+  nav a {margin:0 15px;color:#58a6ff;text-decoration:none;font-weight:bold;transition:color 0.3s,transform 0.3s;}
+  nav a:hover {color:#1f6feb;transform:translateY(-3px);}
+  .hero{text-align:center;padding:80px 20px;animation:fadeIn 1s ease-out;}
+  .hero h1{font-size:2.8em;margin-bottom:20px;animation:slideIn 1s ease-out;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes slideIn{from{transform:translateY(-30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;padding:40px;}
+  .service{background:#21262d;padding:20px;border-radius:12px;text-align:center;box-shadow:0px 4px 10px rgba(0,0,0,0.4);transition:transform 0.3s,box-shadow 0.3s;}
+  .service:hover{transform:translateY(-5px);box-shadow:0px 8px 20px rgba(0,0,0,0.6);}
+  .service h2{color:#58a6ff;}
+  footer{text-align:center;padding:20px;background:#161b22;}
+  #chatbot-container{position:fixed;bottom:20px;right:20px;width:320px;background:#161b22;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.5);display:none;flex-direction:column;overflow:hidden;animation:fadeIn 0.5s ease-out;}
+  #chatbot-header{background:#58a6ff;color:#fff;padding:10px;font-weight:bold;cursor:pointer;}
+  #chatbot-messages{flex:1;padding:10px;overflow-y:auto;max-height:250px;font-size:14px;}
+  #chatbot-input{display:flex;border-top:1px solid #333;}
+  #chatbot-input input{flex:1;border:none;padding:10px;font-size:14px;outline:none;background:#0d1117;color:#fff;}
+  #chatbot-input button{background:#58a6ff;border:none;padding:10px 15px;cursor:pointer;color:#fff;font-weight:bold;transition:background 0.3s;}
+  #chatbot-input button:hover{background:#1f6feb;}
+  #chatbot-toggle{position:fixed;bottom:20px;right:20px;background:#58a6ff;color:#fff;border:none;padding:12px 18px;border-radius:50%;cursor:pointer;font-size:18px;transition:transform 0.3s;}
+  #chatbot-toggle:hover{transform:scale(1.1);}
+</style>
 </head>
 <body>
 
-  <header>
-    <img src="logo.png" alt="Smart IT Solutions Logo">
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#contact">Contact</a>
-      <a href="https://www.linkedin.com/in/sergio-fonseca-it" target="_blank">LinkedIn</a>
-    </nav>
-  </header>
+<header>
+  <img src="logo.png" alt="Smart IT Solutions Logo">
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <a href="https://www.linkedin.com/in/sergio-fonseca-it" target="_blank">LinkedIn</a>
+  </nav>
+</header>
 
-  <section class="hero">
-    <h1>Welcome to Smart IT Solutions</h1>
-    <p>Your trusted partner in IT support, web development, and AI-powered solutions.</p>
-  </section>
+<section class="hero">
+  <h1>Welcome to Smart IT Solutions</h1>
+  <p>Your trusted partner in IT support, web development, and AI-powered solutions.</p>
+</section>
 
-  <section id="services" class="services">
-    <div class="service">
-      <h2>IT Support</h2>
-      <p>Remote and onsite troubleshooting, network setup, and tech assistance.</p>
-    </div>
-    <div class="service">
-      <h2>Web Development</h2>
-      <p>Custom websites designed to showcase your business with SEO optimization.</p>
-    </div>
-    <div class="service">
-      <h2>AI Chatbots</h2>
-      <p>Smart chatbots to engage your clients and provide 24/7 support.</p>
-    </div>
-  </section>
+<section id="services" class="services">
+  <div class="service"><h2>IT Support</h2><p>Remote and onsite troubleshooting, network setup, and tech assistance.</p></div>
+  <div class="service"><h2>Web Development</h2><p>Custom websites designed to showcase your business with SEO optimization.</p></div>
+  <div class="service"><h2>AI Chatbots</h2><p>Smart chatbots to engage your clients and provide 24/7 support.</p></div>
+</section>
 
-  <footer id="contact">
-    <p>📞 Contact us: (239) 315-8670</p>
-    <p>© 2025 Smart IT Solutions</p>
-  </footer>
+<footer id="contact">
+  <p>📞 Contact us: (239) 315-8670</p>
+  <p>© 2025 Smart IT Solutions</p>
+</footer>
 
-  <!-- Chatbot UI -->
-  <button id="chatbot-toggle">💬</button>
-  <div id="chatbot-container">
-    <div id="chatbot-header">Smart IT Assistant</div>
-    <div id="chatbot-messages"></div>
-    <div id="chatbot-input">
-      <input type="text" id="user-input" placeholder="Type your message...">
-      <button onclick="sendMessage()">Send</button>
-    </div>
+<!-- Chatbot UI -->
+<button id="chatbot-toggle">💬</button>
+<div id="chatbot-container">
+  <div id="chatbot-header">Smart IT Assistant</div>
+  <div id="chatbot-messages"></div>
+  <div id="chatbot-input">
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
   </div>
+</div>
 
-  <script>
-    const toggleBtn = document.getElementById("chatbot-toggle");
-    const chatbot = document.getElementById("chatbot-container");
-    const messages = document.getElementById("chatbot-messages");
+<script>
+const toggleBtn = document.getElementById("chatbot-toggle");
+const chatbot = document.getElementById("chatbot-container");
+const messages = document.getElementById("chatbot-messages");
 
-    toggleBtn.onclick = () => {
-      chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
-    };
+toggleBtn.onclick = () => {
+  chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+};
 
-    function sendMessage() {
-      const input = document.getElementById("user-input");
-      const userText = input.value.trim();
-      if (!userText) return;
+function getAIResponse(message) {
+  message = message.toLowerCase();
+  const responses = {
+    hello: "Hello! How can I assist you today?",
+    hi: "Hi there! Need help with IT or web development?",
+    website: "We can create custom websites with SEO optimization.",
+    support: "Our IT support team can help you remotely or onsite.",
+    chatbot: "I can answer questions and provide 24/7 assistance.",
+    default: "Thanks for reaching out! We'll contact you shortly."
+  };
+  for (let key in responses) {
+    if (message.includes(key)) return responses[key];
+  }
+  return responses.default;
+}
 
-      // Display user message
-      const userMsg = document.createElement("div");
-      userMsg.textContent = "👤: " + userText;
-      messages.appendChild(userMsg);
+function sendMessage() {
+  const input = document.getElementById("user-input");
+  const userText = input.value.trim();
+  if (!userText) return;
 
-      // Simulate AI response
-      const botMsg = document.createElement("div");
-      botMsg.textContent = "🤖: Thanks for reaching out! We'll contact you shortly.";
-      messages.appendChild(botMsg);
+  const userMsg = document.createElement("div");
+  userMsg.textContent = "👤: " + userText;
+  messages.appendChild(userMsg);
 
-      // Scroll to bottom
-      messages.scrollTop = messages.scrollHeight;
+  const botMsg = document.createElement("div");
+  botMsg.textContent = "🤖: Typing...";
+  messages.appendChild(botMsg);
+  messages.scrollTop = messages.scrollHeight;
 
-      input.value = "";
-    }
-  </script>
+  setTimeout(() => {
+    botMsg.textContent = "🤖: " + getAIResponse(userText);
+    messages.scrollTop = messages.scrollHeight;
+  }, 800);
+
+  input.value = "";
+}
+</script>
 
 </body>
 </html>
